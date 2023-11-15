@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project-3</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header id="header">
+        <div class="header">
+          <div class="photo">
+            <img src="logo.svg" alt="logo" />
+          </div>
+          <div class="list">
+            <ul>
+              <li><a href="#">БАНК</a></li>
+              <li><a href="#">БИЗНЕС</a></li>
+              <li><a href="#">ИНВЕСТИЦИИ</a></li>
+              <li><a href="#">СТРАХОВАНИЕ</a></li>
+              <li><a href="#">МОБАЙЛ</a></li>
+              <li><a href="#">ПУТЕШЕСТВИЯ</a></li>
+              <li><a href="#">РАЗВЛЕЧЕНИЯ</a></li>
+            </ul>
+          </div>
+          <div class="login">ВОЙТИ</div>
+        </div>
+      </header>
+
+      <main id="main">
+        <div class="main">
+          <h1>Конвертер валют онлайн</h1>
+          <section id="section">
+            <div class="first-sec">
+              <p class="head">У меня есть...</p>
+              <div class="currencies" id="from">
+                <button class="firstBtn">RUB</button>
+                <button>USD</button>
+                <button>EUR</button>
+                <button>GBP</button>
+              </div>
+
+              <div class="amount">
+                <input
+                  type="number"
+                  name="amount"
+                  id="amount"
+                  autocomplete="off"
+                />
+                <p class="rate" id="fromRate"></p>
+              </div>
+            </div>
+            <div class="second-sec">
+              <p class="head">Хочу приобрести...</p>
+
+              <div class="currencies" id="to">
+                <button class="firstBtn">RUB</button>
+                <button>USD</button>
+                <button>EUR</button>
+                <button>GBP</button>
+              </div>
+
+              <div class="amount">
+                <input
+                  type="number"
+                  name="amount"
+                  id="amount"
+                  autocomplete="off"
+                  readonly
+                />
+                <p class="rate" id="toRate"></p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+    <script src="CurrencyTool.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
