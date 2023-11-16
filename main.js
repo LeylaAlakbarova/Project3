@@ -48,14 +48,6 @@ function changeComma(e) {
 }
 
 function exchangeCurrency() {
-  currencyFirst.value = currencyFirst.value.replace(/ /g, "");
-
-  if (
-    (currencyFirst.value.indexOf(",") == -1 || currencyFirst.value.indexOf(".") == -1) && currencyFirst.value.match(/[a-z&\/\\_^#@+()$~%'"`!|:*?<>{}-]/g)
-  ) {
-    currencyFirst.value = "";
-    currencySec.value = "";
-  } else {
     if (
       currencyFirst.value.indexOf(",") == -1 &&
       currencyFirst.value.indexOf(".") == -1
@@ -82,7 +74,7 @@ function exchangeCurrency() {
       }
     });
   }
-}
+// }
 
 function exchangeFrom(e) {
   currencyService.changevalue1(e.target.textContent);
