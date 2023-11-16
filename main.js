@@ -1,9 +1,29 @@
-const amountElementLeft = document.querySelector("#amount");
+let firstBtn1 = document.querySelectorAll("#from button");
+let secBtn2 = document.querySelectorAll("#to button");
+
+change = (e) => {
+  for (element of e.target.parentNode.children) {
+    element.style = "background-color: #fff; color: #C6C6C6;";
+  }
+  e.target.style = "background-color: #833AE0; color: #fff;";
+};
+
+firstBtn1.forEach((button) => {
+  button.addEventListener("click", change);
+});
+secBtn2.forEach((button) => {
+  button.addEventListener("click", change);
+});
+
+
+
+
+const currencyFirst = document.querySelector("#amount");
 
 const firstSelect = document.querySelector("#from");
 const secondSelect = document.querySelector("#to");
 
-const amountElementRight = document.querySelectorAll("#amount")[1];
+const currencySec = document.querySelectorAll("#amount")[1];
 
 const currencyService = new CurrencyTool("RUB", "USD");
 
@@ -13,11 +33,11 @@ function init() {
   document.addEventListener("DOMContentLoaded", () => {
     currencyService.exchange();
   });
-  amountElementLeft.addEventListener("input", exchangeCurrency);
+  currencyFirst.addEventListener("input", exchangeCurrency);
   firstSelect.addEventListener("click", exchangeFrom);
   secondSelect.addEventListener("click", exchangeTo);
-  amountElementLeft.addEventListener("keyup", changeComma);
-  amountElementRight.addEventListener("keyup", changeComma);
+  currencyFirst.addEventListener("keyup", changeComma);
+  currencySec.addEventListener("keyup", changeComma);
 }
 
 function changeComma(e) {
@@ -28,39 +48,37 @@ function changeComma(e) {
 }
 
 function exchangeCurrency() {
-  amountElementLeft.value = amountElementLeft.value.replace(/ /g, "");
+  currencyFirst.value = currencyFirst.value.replace(/ /g, "");
 
   if (
-    (amountElementLeft.value.indexOf(",") == -1 ||
-      amountElementLeft.value.indexOf(".") == -1) &&
-    amountElementLeft.value.match(/[a-z&\/\\_^#@+()$~%'"`!|:*?<>{}-]/g)
+    (currencyFirst.value.indexOf(",") == -1 || currencyFirst.value.indexOf(".") == -1) && currencyFirst.value.match(/[a-z&\/\\_^#@+()$~%'"`!|:*?<>{}-]/g)
   ) {
-    amountElementLeft.value = "";
-    amountElementRight.value = "";
+    currencyFirst.value = "";
+    currencySec.value = "";
   } else {
     if (
-      amountElementLeft.value.indexOf(",") == -1 &&
-      amountElementLeft.value.indexOf(".") == -1
+      currencyFirst.value.indexOf(",") == -1 &&
+      currencyFirst.value.indexOf(".") == -1
     ) {
-      let _new = Number(amountElementLeft.value);
+      let _new = Number(currencyFirst.value);
       if (isNaN(_new)) {
-        amountElementLeft.value = "";
+        currencyFirst.value = "";
       } else {
-        amountElementLeft.value = _new;
+        currencyFirst.value = _new;
       }
 
       currencyService.changeAmount(_new);
     } else {
-      if (amountElementLeft.value.indexOf(",")) {
-        let _new = amountElementLeft.value.replace(",", ".");
+      if (currencyFirst.value.indexOf(",")) {
+        let _new = currencyFirst.value.replace(",", ".");
         currencyService.changeAmount(_new);
       }
     }
     currencyService.exchange().then((result) => {
-      if (amountElementLeft.value == 0) {
-        amountElementRight.value = "";
+      if (currencyFirst.value == 0) {
+        currencySec.value = "";
       } else {
-        amountElementRight.value = result;
+        currencySec.value = result;
       }
     });
   }
@@ -72,10 +90,10 @@ function exchangeFrom(e) {
   currencyService
     .exchange()
     .then((result) => {
-      if (amountElementLeft.value == 0) {
-        amountElementRight.value = "";
+      if (currencyFirst.value == 0) {
+        currencySec.value = "";
       } else {
-        amountElementRight.value = result;
+        currencySec.value = result;
       }
     })
     .catch((err) => console.log(err));
@@ -87,29 +105,13 @@ function exchangeTo(e) {
   currencyService
     .exchange()
     .then((result) => {
-      if (amountElementLeft.value == 0) {
-        amountElementRight.value = "";
+      if (currencyFirst.value == 0) {
+        currencySec.value = "";
       } else {
-        amountElementRight.value = result;
+        currencySec.value = result;
       }
     })
     .catch((err) => console.log(err));
 }
 
 
-let buttonsLeft = document.querySelectorAll("#from button");
-let buttonsRight = document.querySelectorAll("#to button");
-
-change = (e) => {
-  for (element of e.target.parentNode.children) {
-    element.style = "background-color: #fff; color: #C6C6C6;";
-  }
-  e.target.style = "background-color: #833AE0; color: #fff;";
-};
-
-buttonsLeft.forEach((button) => {
-  button.addEventListener("click", change);
-});
-buttonsRight.forEach((button) => {
-  button.addEventListener("click", change);
-});
